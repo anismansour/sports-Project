@@ -12,7 +12,7 @@ export class GamesList extends Component {
             <li>
               {game.teams[0]} vs {game.teams[1]}{" "}
             </li>
-            <li>Starting time: {game.commence_time}</li>
+            <li>Starting time: {new Date(game.commence_time).toString()}</li>
             <h6>ODDS</h6>
             <li>site : {game.sites[3].site_nice}</li>
             <li>{game.sites[3].odds.h2h[0]}</li>

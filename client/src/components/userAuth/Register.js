@@ -1,52 +1,91 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
-export class Register extends Component {
-  constructor(props) {
-    super(props);
+//////////
 
-    this.state = {
-      name: "",
-      email: "",
-      password: ""
-    };
-  }
+class Register extends Component {
+  state = {
+    name: "",
+    email: "",
+    password: "",
+    logged: false
+  };
 
-  changeHandler = e => {};
+  changeHandler = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
+    const registerResponse = await fetch("/api/users", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-type": "application/json"
+      }
+    });
+
+    const parsedResponse = await registerResponse.json();
+    if (parsedResponse.user) {
+      this.props.doSetCurrentUser(parsedResponse.user);
+      this.setState({
+        logged: true
+      });
+    }
   };
 
   render() {
+    const { name, password, email } = this.state;
+
     return (
-      <div className="container">
-        <form className="white" onSubmit={this.onSubmit}>
-          <h5 className="grey-text text-darken-3">Register</h5>
-          <div className="input-field">
-            <label htmlFor="name">name</label>
-            <input type="text" name="name" onChange={this.changeHandler} />
-          </div>
+      <div>
+        {this.state.logged ? (
+          <Redirect to={"/"} />
+        ) : (
+          <div className="container">
+            <form className="white" onSubmit={e => this.onSubmit(e)}>
+              <h5 className="grey-text text-darken-3">Register</h5>
+              <div className="input-field">
+                <label htmlFor="name">name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={e => this.changeHandler(e)}
+                />
+              </div>
 
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" onChange={this.changeHandler} />
-          </div>
+              <div className="input-field">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={e => this.changeHandler(e)}
+                />
+              </div>
 
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={this.changeHandler}
-            />
-          </div>
+              <div className="input-field">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={e => this.changeHandler(e)}
+                />
+              </div>
 
-          <div className="input-field">
-            <button type="submit" className="btn blue lighten-1 z-depth-0">
-              Register
-            </button>
+              <div className="input-field">
+                <button type="submit" className="btn blue lighten-1 z-depth-0">
+                  Register
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        )}
       </div>
     );
   }
