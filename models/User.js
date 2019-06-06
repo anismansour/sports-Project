@@ -14,7 +14,8 @@ const ItemSchema = new Schema({
   },
   email: {
     type: String
-  }
+  },
+  games: [Object]
 });
 
 module.exports = Item = mongoose.model("item", ItemSchema);
