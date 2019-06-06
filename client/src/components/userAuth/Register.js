@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-//////////
-
 class Register extends Component {
   state = {
     name: "",
@@ -29,8 +27,8 @@ class Register extends Component {
     });
 
     const parsedResponse = await registerResponse.json();
-    if (parsedResponse.user) {
-      this.props.doSetCurrentUser(parsedResponse.user);
+    if (parsedResponse.name) {
+      // this.props.doSetCurrentUser(parsedResponse.user);
       this.setState({
         logged: true
       });
@@ -38,11 +36,12 @@ class Register extends Component {
   };
 
   render() {
-    const { name, password, email } = this.state;
+    const { name, password, email, logged } = this.state;
+    console.log(logged, "<=== this.state");
 
     return (
       <div>
-        {this.state.logged ? (
+        {logged ? (
           <Redirect to={"/"} />
         ) : (
           <div className="container">
