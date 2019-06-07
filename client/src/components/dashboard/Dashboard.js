@@ -39,12 +39,6 @@ export class Dashboard extends Component {
     }
   };
 
-  // toggleHandler = () => {
-  //   this.setState({
-  //     toggle: true
-  //   });
-  // };
-
   render() {
     const { games } = this.state;
     console.log(games, "from dashboard");

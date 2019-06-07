@@ -15,14 +15,15 @@ export class GamesList extends Component {
         <div>
           <ul>
             <h6>-----Sport-----</h6>
-
-            <li
-              onClick={() => {
-                this.props.getDetails(game.key);
-              }}
-            >
-              {game.details}
-            </li>
+            <a>
+              <li
+                onClick={() => {
+                  this.props.getDetails(game.key);
+                }}
+              >
+                {game.details}
+              </li>
+            </a>
           </ul>
         </div>
       );

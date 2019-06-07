@@ -31,7 +31,7 @@ export class GameDetails extends Component {
                 <li>{game.sites[0].odds.h2h[1]}</li>
               </>
             ) : (
-              <h3>no odds</h3>
+              <h6>odds not available </h6>
             )}
 
             <button>add</button>
