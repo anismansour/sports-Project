@@ -33,7 +33,7 @@ class App extends Component {
         </div>
         <Switch>
           <Route exact path="/" render={() => <Dashboard />} />
-          <Route path="/game/:id" render={() => <GameDetails />} />
+          {/* <Route path="/game/:id" render={() => <GameDetails />} /> */}
           <Route path="/login" render={() => <Login />} />
           <Route
             path="/register"
