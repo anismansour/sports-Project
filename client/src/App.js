@@ -34,7 +34,15 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Dashboard />} />
           {/* <Route path="/game/:id" render={() => <GameDetails />} /> */}
-          <Route path="/login" render={() => <Login />} />
+          <Route
+            path="/login"
+            render={() => (
+              <Login
+                currentUser={this.state.currentUser}
+                doSetCurrentUser={this.doSetCurrentUser}
+              />
+            )}
+          />
           <Route
             path="/register"
             render={() => (

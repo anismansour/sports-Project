@@ -22,7 +22,9 @@ export class GameDetails extends Component {
             <li>
               {game.teams[0]} vs {game.teams[1]}{" "}
             </li>
-            <li>Starting time: {new Date(game.commence_time).toString()}</li>
+            <li>
+              Starting time: {new Date(game.commence_time * 1000).toString()}
+            </li>
             <h6>ODDS</h6>
             {game.sites[0] ? (
               <>

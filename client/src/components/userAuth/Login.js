@@ -7,10 +7,30 @@ export class Login extends Component {
     logged: false
   };
 
-  changeHandler = e => {};
+  changeHandler = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
+    const loginResponse = await fetch("/api/users/login", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-type": "application/json"
+      }
+    });
+
+    const parsedResponse = await loginResponse.json();
+    if (parsedResponse.user) {
+      this.props.doSetCurrentUser(parsedResponse.user);
+      this.setState({
+        logged: true
+      });
+    }
   };
 
   render() {
