@@ -13,6 +13,7 @@ export class Dashboard extends Component {
     try {
       const response = await fetch("/api/games");
       const gameParsed = await response.json();
+      console.log(gameParsed, "from getgames function");
       return gameParsed;
     } catch (err) {
       console.log(err);
@@ -22,8 +23,14 @@ export class Dashboard extends Component {
 
   render() {
     const { games } = this.state;
+    console.log(games, "from dashboard");
     return (
       <div>
+        <button>Football</button>
+        <button>Soccer</button>
+        <button>Rugby</button>
+        <button>Tennis</button>
+        <button>Basketball</button>
         <GamesList games={games} />
       </div>
     );

@@ -9,11 +9,13 @@ export class SignedInLinks extends Component {
           <NavLink to="/"> Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/">Logout</NavLink>
+          <NavLink to="/login" onClick={this.props.doLogout}>
+            Logout
+          </NavLink>
         </li>
         <li>
           <NavLink to="/" className="btn btn-floating pink lighten-1">
-            {/* {this.props.user.name} */}
+            {this.props.name}
           </NavLink>
         </li>
       </ul>

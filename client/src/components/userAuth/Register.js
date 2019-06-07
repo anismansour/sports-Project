@@ -27,8 +27,9 @@ class Register extends Component {
     });
 
     const parsedResponse = await registerResponse.json();
+    console.log(parsedResponse);
     if (parsedResponse.name) {
-      // this.props.doSetCurrentUser(parsedResponse.user);
+      this.props.doSetCurrentUser(parsedResponse);
       this.setState({
         logged: true
       });

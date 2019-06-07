@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import NavBar from "./components/layout/NavBar";
 import { Switch, Route, withRouter } from "react-router-dom";
@@ -9,20 +9,45 @@ import Register from "./components/userAuth/Register";
 
 //npm run dev to run server and react same time
 
-function App() {
-  return (
-    <div>
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: null
+    };
+  }
+
+  doSetCurrentUser = user => {
+    this.setState({ currentUser: user });
+  };
+  doLogout = () => {
+    this.setState({
+      currentUser: null
+    });
+  };
+  render() {
+    return (
       <div>
-        <NavBar />
+        <div>
+          <NavBar doLogout={this.doLogout} user={this.state.currentUser} />
+        </div>
+        <Switch>
+          <Route exact path="/" render={() => <Dashboard />} />
+          <Route path="/game/:id" render={() => <GameDetails />} />
+          <Route path="/login" render={() => <Login />} />
+          <Route
+            path="/register"
+            render={() => (
+              <Register
+                currentUser={this.state.currentUser}
+                doSetCurrentUser={this.doSetCurrentUser}
+              />
+            )}
+          />
+        </Switch>
       </div>
-      <Switch>
-        <Route exact path="/" render={() => <Dashboard />} />
-        <Route path="/game/:id" render={() => <GameDetails />} />
-        <Route path="/login" render={() => <Login />} />
-        <Route path="/register" render={() => <Register />} />
-      </Switch>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

@@ -12,8 +12,14 @@ export class NavBar extends Component {
           <Link to="/" className="brand-logo left">
             Home
           </Link>
-          <SignedInLinks />
-          <SignedOutLinks />
+          {this.props.user ? (
+            <SignedInLinks
+              doLogout={this.props.doLogout}
+              name={this.props.user.name}
+            />
+          ) : (
+            <SignedOutLinks />
+          )}
         </div>
       </nav>
     );

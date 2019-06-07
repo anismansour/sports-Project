@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 export class GamesList extends Component {
   render() {
+    console.log(this.props.games, "from the game list");
     const gamesList = (this.props.games || []).map((game, i) => {
       return (
         <div>
@@ -14,9 +15,16 @@ export class GamesList extends Component {
             </li>
             <li>Starting time: {new Date(game.commence_time).toString()}</li>
             <h6>ODDS</h6>
-            <li>site : {game.sites[3].site_nice}</li>
-            <li>{game.sites[3].odds.h2h[0]}</li>
-            <li>{game.sites[3].odds.h2h[1]}</li>
+            {game.sites[0] ? (
+              <>
+                <li>site : {game.sites[0].site_nice}</li>
+                <li>{game.sites[0].odds.h2h[0]}</li>
+                <li>{game.sites[0].odds.h2h[1]}</li>
+              </>
+            ) : (
+              <h3>no odds</h3>
+            )}
+
             <button>add</button>
           </ul>
         </div>
