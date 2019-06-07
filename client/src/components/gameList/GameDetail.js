@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import M from "materialize-css";
+import { Collapsible, CollapsibleItem } from "react-materialize";
 
 export class GameDetails extends Component {
   state = {
     games: []
   };
-
-  // componentDidMount() {
-  //   this.getGames().then(list => this.setState({ games: list.data }));
-  // }
+  componentDidMount() {
+    document.addEventListener("DOMContentLoaded", function() {
+      var elems = document.querySelectorAll(".collapsible");
+      var instances = M.Collapsible.init(elems);
+    });
+  }
   render() {
     const { games } = this.state;
 
@@ -17,26 +21,34 @@ export class GameDetails extends Component {
         <div>
           <ul>
             <h6>-----GAME-----</h6>
-            <li>{game.sport_key}</li>
-            <li>{game.sport_nice}</li>
-            <li>
-              {game.teams[0]} vs {game.teams[1]}{" "}
-            </li>
-            <li>
-              Starting time: {new Date(game.commence_time * 1000).toString()}
-            </li>
-            <h6>ODDS</h6>
-            {game.sites[0] ? (
-              <>
-                <li>site : {game.sites[0].site_nice}</li>
-                <li>{game.sites[0].odds.h2h[0]}</li>
-                <li>{game.sites[0].odds.h2h[1]}</li>
-              </>
-            ) : (
-              <h6>odds not available </h6>
-            )}
 
-            <button>add</button>
+            <Collapsible popout>
+              <CollapsibleItem
+                header={game.teams[0] + " vs " + game.teams[1]}
+                icon="whatshot"
+              >
+                {game.teams[0]} vs {game.teams[1]}
+                <li>{game.sport_nice}</li>
+                <li>
+                  {game.teams[0]} vs {game.teams[1]}{" "}
+                </li>
+                <li>
+                  Starting time:{" "}
+                  {new Date(game.commence_time * 1000).toString()}
+                </li>
+                <h6>ODDS</h6>
+                {game.sites[0] ? (
+                  <>
+                    <li>site : {game.sites[0].site_nice}</li>
+                    <li>{game.sites[0].odds.h2h[0]}</li>
+                    <li>{game.sites[0].odds.h2h[1]}</li>
+                  </>
+                ) : (
+                  <h6>odds not available </h6>
+                )}
+                <button>add</button>
+              </CollapsibleItem>
+            </Collapsible>
           </ul>
         </div>
       );
