@@ -6,6 +6,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import GameDetails from "./components/gameList/GameDetail";
 import Login from "./components/userAuth/Login";
 import Register from "./components/userAuth/Register";
+import UserProfile from "./components/userProfile/UserProfile";
 
 //npm run dev to run server and react same time
 
@@ -32,7 +33,11 @@ class App extends Component {
           <NavBar doLogout={this.doLogout} user={this.state.currentUser} />
         </div>
         <Switch>
-          <Route exact path="/" render={() => <Dashboard />} />
+          <Route
+            exact
+            path="/"
+            render={() => <Dashboard currentUser={this.state.currentUser} />}
+          />
           {/* <Route path="/game/:id" render={() => <GameDetails />} /> */}
           <Route
             path="/login"
@@ -51,6 +56,10 @@ class App extends Component {
                 doSetCurrentUser={this.doSetCurrentUser}
               />
             )}
+          />
+          <Route
+            path={`/user/:id`}
+            render={() => <UserProfile currentUser={this.state.currentUser} />}
           />
         </Switch>
       </div>

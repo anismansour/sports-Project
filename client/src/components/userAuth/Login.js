@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 export class Login extends Component {
   state = {
@@ -34,7 +35,9 @@ export class Login extends Component {
   };
 
   render() {
-    return (
+    return this.state.logged ? (
+      <Redirect to={`/users/${this.props.currentUser._id}`} />
+    ) : (
       <div className="container">
         <form className="white" onSubmit={this.onSubmit}>
           <h5 className="grey-text text-darken-3">Login</h5>

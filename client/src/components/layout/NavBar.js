@@ -15,6 +15,7 @@ export class NavBar extends Component {
           {this.props.user ? (
             <SignedInLinks
               doLogout={this.props.doLogout}
+              user={this.props.user}
               name={this.props.user.name}
             />
           ) : (

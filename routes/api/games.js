@@ -32,4 +32,20 @@ router.get("/details/:sport", async (req, res) => {
   res.json(parsedOdds);
 });
 
+router.post("/:id", async (req, res) => {
+  try {
+    console.log("hit");
+    console.log(req.params.id);
+    const foundUser = await User.findById(req.params.id);
+    console.log(foundUser);
+    foundUser.restaurantId.push(req.body);
+    await foundUser.save();
+    res.json({
+      success: true
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

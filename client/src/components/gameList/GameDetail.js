@@ -12,6 +12,20 @@ export class GameDetails extends Component {
       var instances = M.Collapsible.init(elems);
     });
   }
+  AddGameToUser = async obj => {
+    const { currentUser } = this.props;
+
+    const addGame = await fetch(`/api/games/${currentUser._id}`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const parsedResponse = await addGame.json();
+    console.log(parsedResponse);
+  };
   render() {
     const { games } = this.state;
 
@@ -46,7 +60,14 @@ export class GameDetails extends Component {
                 ) : (
                   <h6>odds not available </h6>
                 )}
-                <button>add</button>
+                <button
+                  className="btn waves-effect waves-light  "
+                  type="submit"
+                  name="action"
+                  onClick={() => this.AddGameToUser(game)}
+                >
+                  add
+                </button>
               </CollapsibleItem>
             </Collapsible>
           </ul>

@@ -10,6 +10,16 @@ router.get("/", (req, res) => {
   User.find().then(users => res.json(users));
 });
 
+//  profile  NOT WORKING !!!!!!!
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json({ user });
+  } catch (err) {
+    res.json({ err });
+  }
+});
+
 // @route to login
 
 router.post("/login", async (req, res) => {

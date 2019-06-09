@@ -45,7 +45,12 @@ export class Dashboard extends Component {
     return (
       <div className="game-container">
         <GamesList games={games} getDetails={this.getGameDetails} />
-        {this.state.toggle && <GameDetails details={this.state.gameDetails} />}
+        {this.state.toggle && (
+          <GameDetails
+            currentUser={this.props.currentUser}
+            details={this.state.gameDetails}
+          />
+        )}
       </div>
     );
   }

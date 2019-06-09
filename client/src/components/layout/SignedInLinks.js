@@ -6,7 +6,14 @@ export class SignedInLinks extends Component {
     return (
       <ul className="right">
         <li>
-          <NavLink to="/"> Profile</NavLink>
+          <NavLink
+            to={`/user/${this.props.user._id}`}
+            user={this.props.user}
+            name={this.props.user.name}
+          >
+            {" "}
+            Profile
+          </NavLink>
         </li>
         <li>
           <NavLink to="/login" onClick={this.props.doLogout}>
