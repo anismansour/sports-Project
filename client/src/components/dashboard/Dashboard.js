@@ -41,16 +41,23 @@ export class Dashboard extends Component {
 
   render() {
     const { games } = this.state;
-    console.log(games, "from dashboard");
+
     return (
-      <div className="game-container">
-        <GamesList games={games} getDetails={this.getGameDetails} />
-        {this.state.toggle && (
-          <GameDetails
-            currentUser={this.props.currentUser}
-            details={this.state.gameDetails}
-          />
-        )}
+      <div>
+        <div class="parallax-container">
+          <div class="parallax">
+            <img src="https://www.thinkwy.org/wp-content/uploads/2017/10/hpfulq-1234.jpg" />
+          </div>
+        </div>
+        <div className="game-container">
+          <GamesList games={games} getDetails={this.getGameDetails} />
+          {this.state.toggle && (
+            <GameDetails
+              currentUser={this.props.currentUser}
+              details={this.state.gameDetails}
+            />
+          )}
+        </div>
       </div>
     );
   }

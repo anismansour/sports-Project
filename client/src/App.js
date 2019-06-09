@@ -38,7 +38,6 @@ class App extends Component {
             path="/"
             render={() => <Dashboard currentUser={this.state.currentUser} />}
           />
-          {/* <Route path="/game/:id" render={() => <GameDetails />} /> */}
           <Route
             path="/login"
             render={() => (
@@ -58,7 +57,8 @@ class App extends Component {
             )}
           />
           <Route
-            path={`/user/:id`}
+            exact
+            path="/user/:id"
             render={() => <UserProfile currentUser={this.state.currentUser} />}
           />
         </Switch>

@@ -5,11 +5,6 @@ const fetch = require("node-fetch");
 //Item Model
 const User = require("../../models/User");
 
-// @route GET local  api/users
-router.get("/", (req, res) => {
-  User.find().then(users => res.json(users));
-});
-
 //  profile  NOT WORKING !!!!!!!
 router.get("/:id", async (req, res) => {
   try {
@@ -18,6 +13,11 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     res.json({ err });
   }
+});
+
+// @route GET local  api/users
+router.get("/", (req, res) => {
+  User.find().then(users => res.json(users));
 });
 
 // @route to login

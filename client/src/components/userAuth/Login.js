@@ -36,7 +36,7 @@ export class Login extends Component {
 
   render() {
     return this.state.logged ? (
-      <Redirect to={`/users/${this.props.currentUser._id}`} />
+      <Redirect to={`/user/${this.props.currentUser._id}`} />
     ) : (
       <div className="container">
         <form className="white" onSubmit={this.onSubmit}>

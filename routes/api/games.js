@@ -38,7 +38,7 @@ router.post("/:id", async (req, res) => {
     console.log(req.params.id);
     const foundUser = await User.findById(req.params.id);
     console.log(foundUser);
-    foundUser.restaurantId.push(req.body);
+    foundUser.games.push(req.body);
     await foundUser.save();
     res.json({
       success: true
