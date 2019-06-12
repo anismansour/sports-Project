@@ -44,11 +44,6 @@ export class Dashboard extends Component {
 
     return (
       <div>
-        <div class="parallax-container">
-          <div class="parallax">
-            <img src="https://www.thinkwy.org/wp-content/uploads/2017/10/hpfulq-1234.jpg" />
-          </div>
-        </div>
         <div className="game-container">
           <GamesList games={games} getDetails={this.getGameDetails} />
           {this.state.toggle && (

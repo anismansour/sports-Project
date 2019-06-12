@@ -22,14 +22,35 @@ class UserProfile extends Component {
       console.log(err);
     }
   };
+  DeleteGame = async i => {
+    console.log(" this is id", i);
+    //e.preventDefault(e);
+    try {
+      const deleteGame = await fetch(
+        `/api/users/${this.props.match.params.i}/Games/${i}`,
+        {
+          method: "DELETE"
+        }
+      );
+
+      const deleteGameJson = await deleteGame.json();
+      this.setState({
+        user: deleteGameJson.user
+      });
+    } catch (err) {
+      console.log(err, " error");
+    }
+  };
 
   render() {
     const { games } = this.state.user;
     const { user } = this.state;
+    console.log(user, "<_______");
 
     return (
       <div>
         <h1>{user.name}</h1>
+
         {games &&
           games.map((game, i) => (
             <ul>
@@ -59,6 +80,9 @@ class UserProfile extends Component {
                   ) : (
                     <h6>odds not available </h6>
                   )}
+                  <button onClick={() => this.DeleteGame(game.commence_time)}>
+                    delete
+                  </button>
                 </CollapsibleItem>
               </Collapsible>
             </ul>

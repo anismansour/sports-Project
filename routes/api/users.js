@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 //Item Model
 const User = require("../../models/User");
 
-//  profile  NOT WORKING !!!!!!!
+//  profile   !!!!!!!
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -51,6 +51,15 @@ router.delete("/:id", (req, res) => {
     .then(user => user.remove().then(() => res.json({ success: true })))
     //return 404 false if error
     .catch(err => res.status(404).json({ success: false }));
+});
+
+router.delete("/:id/games/:id", async (req, res) => {
+  const foundUser = await User.findById(req.params.id);
+  foundUser.games = foundUser.game.filter(g => {
+    return g.id != req.params.id;
+  });
+  await foundUser.save();
+  res.json({ user: foundUser });
 });
 
 module.exports = router;
