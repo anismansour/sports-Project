@@ -13,7 +13,7 @@ msf.authenticate("a9982c0c-bc5e-4a44-a84a-0a430c", "anismansour");
 
 router.get("/", async (req, res) => {
   const odds = await fetch(
-    "https://api.the-odds-api.com/v3/sports/?apiKey=910ea1aa412189a38f04b3817176063d"
+    `https://api.the-odds-api.com/v3/sports/?apiKey=${process.env.KEY}`
   );
 
   const parsedOdds = await odds.json();
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
 router.get("/details/:sport", async (req, res) => {
   const odds = await fetch(
-    `https://api.the-odds-api.com/v3/odds/?apiKey=910ea1aa412189a38f04b3817176063d&sport=${
+    `https://api.the-odds-api.com/v3/odds/?apiKey=${process.env.KEY}&sport=${
       req.params.sport
     }&region=us&mkt=h2h`
   );
