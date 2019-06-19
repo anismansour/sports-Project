@@ -14,7 +14,9 @@ const app = express();
 app.use(bodyParser.json());
 
 //DB config
-const db = require("./config/keys").mongoURI;
+// const db = require("./config/keys").mongoURI;
+const db = config.get("mongoURI");
+
 // const db = process.env.MONGODB_URI;
 
 //connect to mongo
@@ -30,9 +32,11 @@ app.use("/api/users", users);
 app.use("/api/games", games);
 
 if (process.env.NODE_ENV === "production") {
+  // Set static folder
   app.use(express.static("client/build"));
+
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "built", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
