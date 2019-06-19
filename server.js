@@ -14,8 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //DB config
-// const db = require("./config/keys").mongoURI;
-const db = config.get("mongoURI");
+const db = require("./config/keys").mongoURI;
 
 // const db = process.env.MONGODB_URI;
 
