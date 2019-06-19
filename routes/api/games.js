@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   );
 
   const parsedOdds = await odds.json();
-  console.log(parsedOdds);
+  // console.log(parsedOdds);
   res.json(parsedOdds);
 });
 
@@ -28,16 +28,16 @@ router.get("/details/:sport", async (req, res) => {
     }&region=us&mkt=h2h`
   );
   const parsedOdds = await odds.json();
-  console.log(parsedOdds);
+  // console.log(parsedOdds);
   res.json(parsedOdds);
 });
 
 router.post("/:id", async (req, res) => {
   try {
-    console.log("hit");
+    // console.log("hit");
     console.log(req.params.id);
     const foundUser = await User.findById(req.params.id);
-    console.log(foundUser);
+    // console.log(foundUser);
     foundUser.games.push(req.body);
     await foundUser.save();
     res.json({
